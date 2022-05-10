@@ -15,7 +15,7 @@ const getReportData = async (req, res) => {
         }
         const x = response.map(x => x.datetime);
         const y = response.map(x => x.value);
-        const type = response.map(x=> x.fields_json);
+        const type = response.map(x=> typeof x.fields_json === "string" ? JSON.parse(x.fields_json.replace(/'/g,'"')): x.fields_json);
         const unit = response[0].unit;
         return res.status(httpStatusCode.OK).send({
             status: true,
@@ -49,7 +49,7 @@ const getFilteredReportData = async (req, res) => {
         }
         const x = response.map(x => x.datetime);
         const y = response.map(x => x.value);
-        const type = response.map(x=> x.fields_json);
+        const type = response.map(x=> typeof x.fields_json === "string" ? JSON.parse(x.fields_json.replace(/'/g,'"')): x.fields_json);
         const unit = response[0].unit;
         return res.status(httpStatusCode.OK).send({
             status: true,
