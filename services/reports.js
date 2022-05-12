@@ -5,7 +5,8 @@ const db = require("../config/database");
 
 const getReportsData = async (varId) => {
     try {
-        const response = await db.query('SELECT * FROM "data".main where var_id =' + varId + ' ORDER BY datetime ASC;');
+        // const response = await db.query('SELECT * FROM "data".main where var_id =' + varId + ' ORDER BY datetime ASC;');
+        const response = await db.query(`SELECT * FROM "data".main m INNER JOIN variables.variables v on v.id = m.var_id and v.id = ${varId} ORDER BY datetime ASC;`);
         return response.rows;
     } catch (error) {
         throw error;

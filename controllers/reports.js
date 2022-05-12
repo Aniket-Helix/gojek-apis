@@ -17,12 +17,17 @@ const getReportData = async (req, res) => {
         const y = response.map(x => x.value);
         const type = response.map(x=> typeof x.fields_json === "string" ? JSON.parse(x.fields_json.replace(/'/g,'"')): x.fields_json);
         const unit = response[0].unit;
+        const yoy = response[0].yoy
+        const qoq = response[0].qoq
+        const mom = response[0].mom
+        const dod = response[0].dod 
+        const wow = response[0].wow
         return res.status(httpStatusCode.OK).send({
             status: true,
             type: 'success',
             message: 'Report data fetched successfully',
             data: {
-                x, y, type, unit
+                x, y, type, unit, yoy, qoq, mom, dod, wow
             },
         });
     } catch (error) {
@@ -51,12 +56,17 @@ const getFilteredReportData = async (req, res) => {
         const y = response.map(x => x.value);
         const type = response.map(x=> typeof x.fields_json === "string" ? JSON.parse(x.fields_json.replace(/'/g,'"')): x.fields_json);
         const unit = response[0].unit;
+        const yoy = response[0].yoy
+        const qoq = response[0].qoq
+        const mom = response[0].mom
+        const dod = response[0].dod 
+        const wow = response[0].wow
         return res.status(httpStatusCode.OK).send({
             status: true,
             type: 'success',
             message: 'Report data fetched successfully',
             data: {
-                x, y, type, unit
+                x, y, type, unit, yoy, qoq, mom, dod, wow
             },
         });
     } catch (error) {
